@@ -37,14 +37,14 @@ done
 # -- Set up environment --------------------------------------------------------
 # ==============================================================================
 
-command -v /usr/bin/clang++-8 >/dev/null 2>&1 || {
-  echo >&2 "clang 8 is required, but it's not installed.";
+command -v /usr/bin/clang++-10 >/dev/null 2>&1 || {
+  echo >&2 "clang 10 is required, but it's not installed.";
   exit 1;
 }
 
-CXX_TAG=c8
-export CC=/usr/bin/clang-8
-export CXX=/usr/bin/clang++-8
+CXX_TAG=c10
+export CC=/usr/bin/clang-10
+export CXX=/usr/bin/clang++-10
 
 source $(dirname "$0")/Environment.sh
 
@@ -105,7 +105,7 @@ unset LLVM_BASENAME
 # -- Get boost includes --------------------------------------------------------
 # ==============================================================================
 
-BOOST_VERSION=1.72.0
+BOOST_VERSION=1.75.0
 BOOST_BASENAME="boost-${BOOST_VERSION}-${CXX_TAG}"
 
 BOOST_INCLUDE=${PWD}/${BOOST_BASENAME}-install/include
@@ -429,7 +429,7 @@ XERCESC_VERSION=3.2.3
 XERCESC_BASENAME=xerces-c-${XERCESC_VERSION}
 
 XERCESC_TEMP_FOLDER=${XERCESC_BASENAME}
-XERCESC_REPO=https://ftp.cixug.es/apache//xerces/c/3/sources/xerces-c-${XERCESC_VERSION}.tar.gz
+XERCESC_REPO=https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-${XERCESC_VERSION}.tar.gz
 
 XERCESC_SRC_DIR=${XERCESC_BASENAME}-source
 XERCESC_INSTALL_DIR=${XERCESC_BASENAME}-install
