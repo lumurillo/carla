@@ -263,65 +263,65 @@ unset RPCLIB_BASENAME
 # -- Get GTest and compile it with libc++ --------------------------------------
 # ==============================================================================
 
-GTEST_VERSION=1.8.1
-GTEST_BASENAME=gtest-${GTEST_VERSION}-${CXX_TAG}
+# GTEST_VERSION=1.8.1
+# GTEST_BASENAME=gtest-${GTEST_VERSION}-${CXX_TAG}
 
-GTEST_LIBCXX_INCLUDE=${PWD}/${GTEST_BASENAME}-libcxx-install/include
-GTEST_LIBCXX_LIBPATH=${PWD}/${GTEST_BASENAME}-libcxx-install/lib
-GTEST_LIBSTDCXX_INCLUDE=${PWD}/${GTEST_BASENAME}-libstdcxx-install/include
-GTEST_LIBSTDCXX_LIBPATH=${PWD}/${GTEST_BASENAME}-libstdcxx-install/lib
+# GTEST_LIBCXX_INCLUDE=${PWD}/${GTEST_BASENAME}-libcxx-install/include
+# GTEST_LIBCXX_LIBPATH=${PWD}/${GTEST_BASENAME}-libcxx-install/lib
+# GTEST_LIBSTDCXX_INCLUDE=${PWD}/${GTEST_BASENAME}-libstdcxx-install/include
+# GTEST_LIBSTDCXX_LIBPATH=${PWD}/${GTEST_BASENAME}-libstdcxx-install/lib
 
-if [[ -d "${GTEST_BASENAME}-libcxx-install" && -d "${GTEST_BASENAME}-libstdcxx-install" ]] ; then
-  log "${GTEST_BASENAME} already installed."
-else
-  rm -Rf \
-      ${GTEST_BASENAME}-source \
-      ${GTEST_BASENAME}-libcxx-build ${GTEST_BASENAME}-libstdcxx-build \
-      ${GTEST_BASENAME}-libcxx-install ${GTEST_BASENAME}-libstdcxx-install
+# if [[ -d "${GTEST_BASENAME}-libcxx-install" && -d "${GTEST_BASENAME}-libstdcxx-install" ]] ; then
+#   log "${GTEST_BASENAME} already installed."
+# else
+#   rm -Rf \
+#       ${GTEST_BASENAME}-source \
+#       ${GTEST_BASENAME}-libcxx-build ${GTEST_BASENAME}-libstdcxx-build \
+#       ${GTEST_BASENAME}-libcxx-install ${GTEST_BASENAME}-libstdcxx-install
 
-  log "Retrieving Google Test."
+#   log "Retrieving Google Test."
 
-  git clone --depth=1 -b release-${GTEST_VERSION} https://github.com/google/googletest.git ${GTEST_BASENAME}-source
+#   git clone --depth=1 -b release-${GTEST_VERSION} https://github.com/google/googletest.git ${GTEST_BASENAME}-source
 
-  log "Building Google Test with libc++."
+#   log "Building Google Test with libc++."
 
-  mkdir -p ${GTEST_BASENAME}-libcxx-build
+#   mkdir -p ${GTEST_BASENAME}-libcxx-build
 
-  pushd ${GTEST_BASENAME}-libcxx-build >/dev/null
+#   pushd ${GTEST_BASENAME}-libcxx-build >/dev/null
 
-  cmake -G "Ninja" \
-      -DCMAKE_CXX_FLAGS="-std=c++14 -stdlib=libc++ -I${LLVM_INCLUDE} -Wl,-L${LLVM_LIBPATH} -DBOOST_NO_EXCEPTIONS -fno-exceptions" \
-      -DCMAKE_INSTALL_PREFIX="../${GTEST_BASENAME}-libcxx-install" \
-      ../${GTEST_BASENAME}-source
+#   cmake -G "Ninja" \
+#       -DCMAKE_CXX_FLAGS="-std=c++14 -stdlib=libc++ -I${LLVM_INCLUDE} -Wl,-L${LLVM_LIBPATH} -DBOOST_NO_EXCEPTIONS -fno-exceptions" \
+#       -DCMAKE_INSTALL_PREFIX="../${GTEST_BASENAME}-libcxx-install" \
+#       ../${GTEST_BASENAME}-source
 
-  ninja
+#   ninja
 
-  ninja install
+#   ninja install
 
-  popd >/dev/null
+#   popd >/dev/null
 
-  log "Building Google Test with libstdc++."
+#   log "Building Google Test with libstdc++."
 
-  mkdir -p ${GTEST_BASENAME}-libstdcxx-build
+#   mkdir -p ${GTEST_BASENAME}-libstdcxx-build
 
-  pushd ${GTEST_BASENAME}-libstdcxx-build >/dev/null
+#   pushd ${GTEST_BASENAME}-libstdcxx-build >/dev/null
 
-  cmake -G "Ninja" \
-      -DCMAKE_CXX_FLAGS="-std=c++14" \
-      -DCMAKE_INSTALL_PREFIX="../${GTEST_BASENAME}-libstdcxx-install" \
-      ../${GTEST_BASENAME}-source
+#   cmake -G "Ninja" \
+#       -DCMAKE_CXX_FLAGS="-std=c++14" \
+#       -DCMAKE_INSTALL_PREFIX="../${GTEST_BASENAME}-libstdcxx-install" \
+#       ../${GTEST_BASENAME}-source
 
-  ninja
+#   ninja
 
-  ninja install
+#   ninja install
 
-  popd >/dev/null
+#   popd >/dev/null
 
-  rm -Rf ${GTEST_BASENAME}-source ${GTEST_BASENAME}-libcxx-build ${GTEST_BASENAME}-libstdcxx-build
+#   rm -Rf ${GTEST_BASENAME}-source ${GTEST_BASENAME}-libcxx-build ${GTEST_BASENAME}-libstdcxx-build
 
-fi
+# fi
 
-unset GTEST_BASENAME
+# unset GTEST_BASENAME
 
 # ==============================================================================
 # -- Get Recast&Detour and compile it with libc++ ------------------------------

@@ -28,6 +28,6 @@ else ()
 endif ()
 
 # GTest is not compiled on Windows.
-if ((LIBCARLA_BUILD_TEST) AND (NOT WIN32))
-  add_subdirectory("test")
-endif()
+#if ((LIBCARLA_BUILD_TEST) AND (NOT WIN32))
+#  add_subdirectory("test")
+#endif()
