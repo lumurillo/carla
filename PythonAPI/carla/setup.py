@@ -163,8 +163,8 @@ with open("README.md") as f:
 setup(
     name='carla',
     version='0.9.13',
-    package_dir={'': 'source'},
-    packages=['carla'],
+    package_dir={'': 'source', 'agents': 'agents', 'agents.navigation':'agents/navigation', 'agents.tools':'agents/tools'},
+    packages=['carla', 'agents', 'agents.navigation', 'agents.tools'],
     ext_modules=get_libcarla_extensions(),
     license=get_license(),
     description='Python API for communicating with the CARLA server.',
